@@ -1,4 +1,4 @@
-import {difference, division, multiply, sum} from './Calculator';
+import { difference, division, interpretateExpression, multiply, sum } from './Calculator';
 
 describe('Math operations', () => {
     it('Sum operation', () => {
@@ -27,5 +27,25 @@ describe('Math operations', () => {
 
     it('Multiply operation', () => {
         expect(multiply(2,3)).toBe(6);
+    });
+});
+
+describe('Work with regex', () => {
+    it('Simple expression', ( )=> {
+        const result = interpretateExpression('5-2');
+
+        expect(result).toEqual(['5','-','2']);
+    });
+
+    it('A lot of spaces', ( )=> {
+        const result = interpretateExpression('5-2 -                           3');
+
+        expect(result).toEqual(['5','-','2','-','3']);
+    });
+
+    it('Expression with ()', ( )=> {
+        const result = interpretateExpression('5-(-2)');
+
+        expect(result).toEqual(['5','-','-','2']);
     });
 });
